@@ -23,6 +23,8 @@ set RAILS_GENERATE_COMMANDS 'assets channel controller generator helper integrat
 
 set --local available_databases mysql oracle postgresql sqlite3 frontbase ibm_db jdbcmysql jdbcsqlite3 jdbcpostgresql jdbc
 
+complete -f -c rails -a 'secret'
+
 complete -f -c rails -n '__fish_rails_needs_command' -s v -l version  -x -d 'Show Rails version'
 
 complete -f -c rails -n '__fish_rails_needs_command' -a 'generate g' -d "Generate new code"
