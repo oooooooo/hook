@@ -18,11 +18,17 @@ function __fish_rails_using_command
   return 1
 end
 
+# rails generate --help | ruby -ne 'BEGIN { cmd = []; match = false }; match = false if $_ =~ /\AActiveRecord:/; cmd << $_.strip if match; match=true if $_=~/\ARails:/; END { puts cmd.join " " }'
+set RAILS_GENERATE_COMMANDS 'assets channel controller generator helper integration_test jbuilder job mailer migration model resource responders_controller scaffold scaffold_controller task'
+
 set --local available_databases mysql oracle postgresql sqlite3 frontbase ibm_db jdbcmysql jdbcsqlite3 jdbcpostgresql jdbc
 
 complete -f -c rails -n '__fish_rails_needs_command' -s v -l version  -x -d 'Show Rails version'
 
-complete -f -c rails -n '__fish_rails_needs_command' -a generate    -d "Generate new code"
+complete -f -c rails -n '__fish_rails_needs_command' -a 'generate g' -d "Generate new code"
+complete -f -c rails -n '__fish_rails_using_command generate' -a $RAILS_GENERATE_COMMANDS
+complete -f -c rails -n '__fish_rails_using_command g'        -a $RAILS_GENERATE_COMMANDS
+
 complete -f -c rails -n '__fish_rails_needs_command' -a console     -d "Start the Rails console"
 
 complete -f -c rails -n '__fish_rails_needs_command' -a server      -d "Start the Rails server"
